@@ -52,6 +52,7 @@ gem 'bcrypt-ruby', '3.1.2'
 # gem 'debugger', group: [:development, :test]
 
 group :test, :development do
+  gem "pry"
   gem "minitest"
   gem "rspec-rails", "2.14.1"
 end
