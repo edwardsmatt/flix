@@ -1,5 +1,8 @@
 <%= form_for(@user) do |f| %>
   <%= render "shared/errors", object: @user %>
+  <p>
+    No account yet? <%= link_to 'Sign up!', signup_path %>
+  </p>
   <fieldset>
     <ol>
       <li class="required">
