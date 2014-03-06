@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe "Viewing the list of movies" do
-  
-  it "shows the movies" do    
+
+  it "shows the movies" do
     movie1 = Movie.create!(title: "Iron Man",
                            rating: "PG-13",
                            total_gross: 318412101.00,
@@ -11,7 +11,7 @@ describe "Viewing the list of movies" do
                            cast: "Robert Downey Jr., Gwyneth Paltrow and Terrence Howard",
                            director: "Jon Favreau",
                            duration: "126 min",
-                           image_file_name: "ironman.jpg")
+                           image: open("#{Rails.root}/app/assets/images/ironman.jpg"))
 
     movie2 = Movie.create!(title: "Superman",
                            rating: "PG",
@@ -21,7 +21,7 @@ describe "Viewing the list of movies" do
                            cast: "Christopher Reeve, Margot Kidder and Gene Hackman",
                            director: "Richard Donner",
                            duration: "143 min",
-                           image_file_name: "superman.jpg")
+                           image: open("#{Rails.root}/app/assets/images/superman.jpg"))
 
     movie3 = Movie.create!(title: "Spider-Man",
                            rating: "PG-13",
@@ -31,7 +31,7 @@ describe "Viewing the list of movies" do
                            cast: "Tobey Maguire, Kirsten Dunst and Willem Dafoe",
                            director: "Sam Raimi",
                            duration: "121 min",
-                           image_file_name: "spiderman.jpg")
+                           image: open("#{Rails.root}/app/assets/images/spiderman.jpg"))
 
     visit movies_url
 
@@ -45,31 +45,32 @@ describe "Viewing the list of movies" do
     expect(page).to have_text("$318,412,101.00")
     expect(page).to have_text(movie1.cast)
     expect(page).to have_text(movie1.duration)
-    expect(page).to have_selector("img[src$='#{movie1.image_file_name}']")
+    # expect(page).to have_selector("img[src$='#{movie1.image_file_name}']")
+    expect(page).to have_selector("img[src$='#{movie1.image.url}']")
   end
-  
+
   it "does not show a movie that hasn't yet been released" do
     movie = Movie.create!(movie_attributes(released_on: 1.month.from_now))
-    
+
     visit movies_path
-    
+
     expect(page).not_to have_text(movie.title)
   end
-  
+
   it "shows the movies in order of date" do
     movie1 = Movie.new(movie_attributes(title: "Movie 1"))
     movie1.released_on = 2.days.ago
     movie1.save!
-    
+
     movie2 = Movie.new(movie_attributes(title: "Movie 2"))
     movie2.released_on = 1.day.ago
     movie2.save!
-    
-    visit movies_url  
-  
+
+    visit movies_url
+
     movies_all = all(".movie")
     expect(movies_all[0]["id"]).to eq("movie_#{movie2.id}")
     expect(movies_all[1]["id"]).to eq("movie_#{movie1.id}")
   end
-  
+
 end
