@@ -90,4 +90,40 @@ describe "A user" do
 
     expect(user.password_digest).to be_present
   end
+
+  describe "authenticate with email" do
+    before do
+      @user = User.create!(user_attributes)
+    end
+
+    it "returns false if the email does not match" do
+      expect(User.authenticate("nomatch", @user.password)).to be_false
+    end
+
+    it "returns false if the password does not match" do
+      expect(User.authenticate(@user.email, "nomatch")).to be_false
+    end
+
+    it "returns the user if the email and password match" do
+      expect(User.authenticate(@user.email, @user.password)).to eq(@user)
+    end
+  end
+
+ describe "authenticate with username" do
+    before do
+      @user = User.create!(user_attributes)
+    end
+
+    it "returns false if the username does not match" do
+      expect(User.authenticate("nomatch", @user.password)).to be_false
+    end
+
+    it "returns false if the password does not match" do
+      expect(User.authenticate(@user.username, "nomatch")).to be_false
+    end
+
+    it "returns the user if the username and password match" do
+      expect(User.authenticate(@user.username, @user.password)).to eq(@user)
+    end
+  end
 end
