@@ -9,10 +9,10 @@
 Movie.create!([
   {
     title: 'Iron Man',
-    description: 
+    description:
     %{
-      When wealthy industrialist Tony Stark is forced to build an 
-      armored suit after a life-threatening incident, he ultimately 
+      When wealthy industrialist Tony Stark is forced to build an
+      armored suit after a life-threatening incident, he ultimately
       decides to use its technology to fight against evil.
     }.squish,
     image_file_name: 'ironman.jpg',
@@ -25,10 +25,10 @@ Movie.create!([
   },
   {
     title: 'Superman',
-    description: 
+    description:
     %{
-      An alien orphan is sent from his dying planet to Earth, where 
-      he grows up to become his adoptive home's first and greatest 
+      An alien orphan is sent from his dying planet to Earth, where
+      he grows up to become his adoptive home's first and greatest
       super-hero.
     }.squish,
     image_file_name: 'superman.jpg',
@@ -41,11 +41,11 @@ Movie.create!([
   },
   {
     title: 'Spider-Man',
-    description: 
+    description:
     %{
-      When bitten by a genetically modified spider, a nerdy, shy, and 
-      awkward high school student gains spider-like abilities that he 
-      eventually must use to fight evil as a superhero after tragedy 
+      When bitten by a genetically modified spider, a nerdy, shy, and
+      awkward high school student gains spider-like abilities that he
+      eventually must use to fight evil as a superhero after tragedy
       befalls his family.
     }.squish,
     image_file_name: 'spiderman.jpg',
@@ -58,9 +58,9 @@ Movie.create!([
   },
   {
     title: 'Batman',
-    description: 
+    description:
     %{
-      The Dark Knight of Gotham City begins his war on crime with his 
+      The Dark Knight of Gotham City begins his war on crime with his
       first major enemy being the clownishly homicidal Joker.
     }.squish,
     image_file_name: 'batman.jpg',
@@ -73,10 +73,10 @@ Movie.create!([
   },
   {
     title: "Catwoman",
-    description: 
+    description:
     %{
-      Patience Philips seems destined to spend her life apologizing for taking up space. 
-      Despite her artistic ability&mdash;she has a more than respectable career as a graphic 
+      Patience Philips seems destined to spend her life apologizing for taking up space.
+      Despite her artistic ability&mdash;she has a more than respectable career as a graphic
       designer.
     }.squish,
     image_file_name: "catwoman.jpg",
@@ -89,7 +89,7 @@ Movie.create!([
   },
   {
     title: 'Batman vs. Godzilla',
-    description: 
+    description:
     %{
       An epic battle between The Caped Crusader and the fire-breathing dinosaur Gojira.
       Hang on to your popcorn, kids!
@@ -110,3 +110,27 @@ movie.reviews.create!(name: "Gene Siskel", stars: 5, comment: "I'm a better revi
 movie.reviews.create!(name: "Peter Travers", stars: 4, comment: "It's been years since a movie superhero was this fierce and this funny.")
 movie = Movie.find_by(title: 'Superman')
 movie.reviews.create!(name: "Elvis Mitchell", stars: 5, comment: "It's a bird, it's a plane, it's a blockbuster!")
+
+User.create!([
+    {
+      username: "larry",
+      name: "Larry McStooge",
+      email: "larry@example.com",
+      password: "secret-password",
+      password_confirmation: "secret-password"
+    },
+    {
+      username: "moe",
+      name: "Moe McStooge",
+      email: "moe@example.com",
+      password: "secret-password",
+      password_confirmation: "secret-password"
+    },
+    {
+      username: "curly",
+      name: "Curly McStooge",
+      email: "curly@example.com",
+      password: "secret-password",
+      password_confirmation: "secret-password"
+    }
+  ])
