@@ -11,6 +11,7 @@ describe "Viewing a user's profile page" do
 
     expect(page).to have_text(user.name)
     expect(page).to have_text(user.email)
+    expect(page).to have_link('Delete Account')
   end
 
 end
