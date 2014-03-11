@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
     def require_correct_user
       @user = User.find(params[:id])
-      redirect_to root_url, alert: "You can't do that!" unless current_user?(@user)
+      redirect_to root_url, alert: "You can't do that!" unless current_user_or_admin?(@user)
     end
 
 end
