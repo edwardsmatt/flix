@@ -20,6 +20,10 @@ private
     current_user == @user
   end
 
+  def current_user_or_admin?(user)
+    current_user?(user) || current_user_admin?
+  end
+
   def current_user_admin?
     current_user && current_user.admin?
   end
@@ -30,5 +34,5 @@ private
     end
   end
 
-  helper_method :current_user, :current_user?, :current_user_admin?
+  helper_method :current_user, :current_user?, :current_user_admin?, :current_user_or_admin?
 end

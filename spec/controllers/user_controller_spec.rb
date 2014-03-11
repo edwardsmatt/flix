@@ -71,4 +71,17 @@ describe UsersController do
     end
 
    end
+
+  context "when signed in as a non admin user" do
+
+    before do
+      @non_admin = User.create!(user_attributes(username: "nonadmin", email: "non_admin@example.com", admin: false))
+      session[:user_id] = @non_admin.id
+    end
+
+    it "can destroy self" do
+      delete :destroy, id: @non_admin
+      expect(response).to redirect_to(root_url)
+    end
+   end
 end
