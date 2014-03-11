@@ -31,3 +31,36 @@ describe "Deleting a user" do
     expect(page).not_to have_link('Sign Out')
   end
 end
+
+  describe "Deleting a user as an admin" do
+    before(:each) do
+      @admin_user = User.create!(user_attributes(admin: true))
+      @user_to_delete = User.create!(user_attributes(username: 'deleteme', name: 'Delete Me', email: 'deleteme@example.com', admin: false))
+    end
+
+    it "destroys the user and redirects to the home page" do
+      sign_in(@admin_user)
+
+      visit user_path(@user_to_delete)
+
+      click_link 'Delete Account'
+
+      expect(current_path).to eq(root_path)
+      expect(page).to have_text('Account successfully deleted!')
+
+      visit users_path
+
+      expect(page).not_to have_text(@user_to_delete.name)
+    end
+
+    it "does not automatically sign out the admin user" do
+      sign_in(@admin_user)
+
+      visit user_path(@user_to_delete)
+
+      click_link 'Delete Account'
+
+      expect(page).not_to have_link('Sign In')
+      expect(page).to have_link('Sign Out')
+    end
+end
