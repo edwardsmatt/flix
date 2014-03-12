@@ -117,7 +117,8 @@ User.create!([
       name: "Larry McStooge",
       email: "larry@example.com",
       password: "secret-password",
-      password_confirmation: "secret-password"
+      password_confirmation: "secret-password",
+      admin: true
     },
     {
       username: "moe",
@@ -125,6 +126,7 @@ User.create!([
       email: "moe@example.com",
       password: "secret-password",
       password_confirmation: "secret-password"
+      admin: true
     },
     {
       username: "curly",
@@ -132,5 +134,6 @@ User.create!([
       email: "curly@example.com",
       password: "secret-password",
       password_confirmation: "secret-password"
+      admin: true
     }
   ])
