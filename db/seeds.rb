@@ -137,3 +137,9 @@ User.create!([
       admin: true
     }
   ])
+
+movie = Movie.find_by(title: 'Iron Man')
+movie.fans << User.find_by(username: 'larry')
+movie.fans << User.find_by(username: 'moe')
+movie = Movie.find_by(title: 'Superman')
+movie.fans << User.find_by(username: 'curly')
