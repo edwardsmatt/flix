@@ -104,13 +104,6 @@ Movie.create!([
   }
 ])
 
-movie = Movie.find_by(title: 'Iron Man')
-movie.reviews.create!(name: "Roger Ebert", stars: 3, comment: "I laughed, I cried, I spilled my popcorn!")
-movie.reviews.create!(name: "Gene Siskel", stars: 5, comment: "I'm a better reviewer than he is.")
-movie.reviews.create!(name: "Peter Travers", stars: 4, comment: "It's been years since a movie superhero was this fierce and this funny.")
-movie = Movie.find_by(title: 'Superman')
-movie.reviews.create!(name: "Elvis Mitchell", stars: 5, comment: "It's a bird, it's a plane, it's a blockbuster!")
-
 User.create!([
     {
       username: "larry",
@@ -125,15 +118,60 @@ User.create!([
       name: "Moe McStooge",
       email: "moe@example.com",
       password: "secret-password",
-      password_confirmation: "secret-password"
-      admin: true
+      password_confirmation: "secret-password",
+      admin: false
     },
     {
       username: "curly",
       name: "Curly McStooge",
       email: "curly@example.com",
       password: "secret-password",
-      password_confirmation: "secret-password"
-      admin: true
+      password_confirmation: "secret-password",
+      admin: false
+    },
+    {
+      username: "roger",
+      name: "Roger Ebert",
+      email: "roger@example.com",
+      password: "secret-password",
+      password_confirmation: "secret-password",
+      admin: false
+    },
+    {
+      username: "gene",
+      name: "Gene Siskel",
+      email: "gene@example.com",
+      password: "secret-password",
+      password_confirmation: "secret-password",
+      admin: false
+    },
+    {
+      username: "peter",
+      name: "Peter Travers",
+      email: "peter@example.com",
+      password: "secret-password",
+      password_confirmation: "secret-password",
+      admin: false
+    },
+    {
+      username: "elvis",
+      name: "Elvis Mitchell",
+      email: "elvis@example.com",
+      password: "secret-password",
+      password_confirmation: "secret-password",
+      admin: false
     }
   ])
+
+movie = Movie.find_by(title: 'Iron Man')
+movie.reviews.create!(user: User.find_by(username: 'roger'), stars: 3, comment: "I laughed, I cried, I spilled my popcorn!")
+movie.reviews.create!(user: User.find_by(username: 'gene'), stars: 5, comment: "I'm a better reviewer than he is.")
+movie.reviews.create!(user: User.find_by(username: 'peter'), stars: 4, comment: "It's been years since a movie superhero was this fierce and this funny.")
+movie = Movie.find_by(title: 'Superman')
+movie.reviews.create!(user: User.find_by(username: 'elvis'),  stars: 5, comment: "It's a bird, it's a plane, it's a blockbuster!")
+
+movie = Movie.find_by(title: 'Iron Man')
+movie.fans << User.find_by(username: 'larry')
+movie.fans << User.find_by(username: 'moe')
+movie = Movie.find_by(title: 'Superman')
+movie.fans << User.find_by(username: 'curly')
