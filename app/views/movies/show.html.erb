@@ -13,8 +13,9 @@
     <%= @movie.rating %> &bull; <%= @movie.duration %>
   </h3>
   <p>
-    <%= pluralize(@fans.size, 'fan') %>
+    <%= pluralize(@fans.size, 'fan') %> and <%= pluralize(@critics.size, 'critic') %>
   </p>
+
   <% if @fans.any? %>
     <h3>Fans</h3>
     <ul>
@@ -26,6 +27,16 @@
     </ul>
   <% end %>
 
+<% if @critics.any? %>
+    <h3>Critics</h3>
+    <ul>
+      <% @critics.each do |user| %>
+        <li>
+          <%= link_to user.name, user %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 
   <h3>Cast</h3>
   <p>

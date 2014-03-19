@@ -13,6 +13,18 @@ describe "A movie" do
     expect(movie.fans).to include(fan2)
   end
 
+  it "has critics" do
+    movie = Movie.new(movie_attributes)
+    critic1 = User.new(user_attributes(email: "larry@example.com"))
+    critic2 = User.new(user_attributes(email: "moe@example.com"))
+
+    movie.reviews.new(user: critic1, stars: 3, comment: "I laughed, I cried, I spilled my popcorn!")
+    movie.reviews.new(user: critic2, stars: 3, comment: "I laughed, I cried, I spilled my popcorn!")
+
+    expect(movie.critics).to include(critic1)
+    expect(movie.critics).to include(critic2)
+  end
+
   it "requires a title" do
     movie = Movie.new(title: "")
 
