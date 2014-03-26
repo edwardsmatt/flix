@@ -3,6 +3,8 @@ class Movie < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   has_many :fans, through: :favorites, source: :user
   has_many :critics, through: :reviews, source: :user
+  has_many :characterizations, dependent: :destroy
+  has_many :genres, through: :characterizations
 
   has_attached_file :image, styles: {
     small: "90x133>",
@@ -18,8 +20,8 @@ class Movie < ActiveRecord::Base
   validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
 
   validates_attachment :image,
-      :content_type => { :content_type => ['image/jpeg', 'image/png'] },
-      :size => { :less_than => 1.megabyte }
+  :content_type => { :content_type => ['image/jpeg', 'image/png'] },
+  :size => { :less_than => 1.megabyte }
 
   RATINGS = %w(G PG PG-13 R NC-17)
 
