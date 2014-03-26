@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe MoviesController do
+describe GenresController do
 
   before do
-    @movie = Movie.create!(movie_attributes)
+    @genre = Genre.create!(name: "test Genre")
   end
 
   context "when not signed in as an admin user" do
@@ -26,19 +26,25 @@ describe MoviesController do
     end
 
     it "cannot access edit" do
-      get :edit, id: @movie
+      get :edit, id: @genre
 
       expect(response).to redirect_to(root_url)
     end
 
     it "cannot access update" do
-      patch :update, id: @movie
+      patch :update, id: @genre
 
       expect(response).to redirect_to(root_url)
     end
 
     it "cannot access destroy" do
-      delete :destroy, id: @movie
+      delete :destroy, id: @genre
+
+      expect(response).to redirect_to(root_url)
+    end
+
+    it "cannot access show" do
+      get :show, id: @genre
 
       expect(response).to redirect_to(root_url)
     end

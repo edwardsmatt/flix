@@ -1,0 +1,11 @@
+<ul id="genres">
+  <% @genres.each do |genre| %>
+  <li>
+    <article class="genre" id="<%= dom_id(genre) %>">
+        <p><%= link_to genre.name, genre %></p>
+      <footer>
+      </footer>
+    </article>
+  </li>
+  <% end %>
+</ul>
