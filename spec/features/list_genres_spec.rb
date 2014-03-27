@@ -2,8 +2,7 @@ require "spec_helper"
 
 describe "Viewing the list of genres" do
  before do
-  @user = User.create!(user_attributes(admin: true))
-  sign_in(@user)
+  @user = User.create!(user_attributes(admin: false))
 end
 
 it "shows the genres" do

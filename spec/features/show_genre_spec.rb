@@ -4,8 +4,6 @@ describe "Viewing an individual genre" do
    before do
     @genre = Genre.create!(name: 'Action')
     @user = User.create!(user_attributes(admin: true))
-
-    sign_in(@user)
   end
 
   it "shows the genre" do

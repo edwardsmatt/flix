@@ -43,10 +43,10 @@ describe GenresController do
       expect(response).to redirect_to(root_url)
     end
 
-    it "cannot access show" do
+    it "can access show" do
       get :show, id: @genre
 
-      expect(response).to redirect_to(root_url)
+      expect(response.status).to eq(200)
     end
   end
 
