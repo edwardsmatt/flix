@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   before_action :set_movie, except: [:index, :new, :create]
 
   def index
-    @movies = Movie.released
+    @movies = Movie.send(movies_scope)
   end
 
   def show
@@ -46,10 +46,18 @@ class MoviesController < ApplicationController
     redirect_to movies_url, alert: "Movie successfully deleted!"
   end
 
-private
+  private
 
   def movie_params
     params.require(:movie).permit(:title, :description, :rating, :released_on, :total_gross, :cast, :director, :duration, :image, genre_ids: [])
+  end
+
+  def movies_scope
+    if params[:scope].in? %w(hits flops upcoming recent)
+      params[:scope]
+    else
+      :released
+    end
   end
 
   def set_movie
