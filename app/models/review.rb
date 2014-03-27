@@ -1,6 +1,7 @@
 class Review < ActiveRecord::Base
   belongs_to :movie
   belongs_to :user
+  scope :past_n_days, ->(num_days) { where('created_at >= ?' , num_days.days.ago) }
 
   validates :comment, length: { minimum: 4 }
 

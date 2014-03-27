@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_movies, through: :favorites, source: :movie
+  scope :by_name, -> { order(name: :asc)}
+  scope :not_admins, -> { by_name.where(admin: false)}
 
   has_secure_password
 
