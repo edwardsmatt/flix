@@ -23,14 +23,21 @@ class GenresController < ApplicationController
   end
 
   def new
+    @genre = Genre.new
   end
 
   def create
-
+    @genre = Genre.new(genre_params)
+    if @genre.save
+      redirect_to @genre, notice: "Genre successfully created!"
+    else
+      render :new
+    end
   end
 
   def destroy
-
+     @genre.destroy
+    redirect_to genres_url, alert: "Genre successfully deleted!"
   end
 
   private

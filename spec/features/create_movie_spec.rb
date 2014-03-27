@@ -8,7 +8,7 @@ describe "Creating a new movie" do
     @genre3 = Genre.create!(name: "Genre 3")
     sign_in(admin)
   end
-  it "saves the movie and shows the new event's details" do
+  it "saves the movie and shows the new movie's details" do
     visit movies_url
 
     click_link 'Add New Movie'
