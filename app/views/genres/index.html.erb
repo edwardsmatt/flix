@@ -2,7 +2,9 @@
   <% @genres.each do |genre| %>
   <li>
     <article class="genre" id="<%= dom_id(genre) %>">
-        <p><%= link_to genre.name, genre %></p>
+      <header>
+        <h2><%= link_to genre.name, genre %></h2>
+      </header>
       <footer>
       </footer>
     </article>

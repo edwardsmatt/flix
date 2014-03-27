@@ -111,7 +111,7 @@ aside#sidebar {
     letter-spacing: 1px;
     text-transform: uppercase;
   }
-  
+
   h3 {
     font-size: 110%;
     border-bottom: 1px solid $subdued-color;
@@ -144,6 +144,20 @@ aside#sidebar {
           background: image-url("add.png") no-repeat 10px 8px;
           padding-left: 35px;
         }
+
+
+        &.genres a {
+          display: block;
+          background: image-url("arrow.png") no-repeat 10px 8px;
+          padding-left: 35px;
+        }
+
+        &.create-genre a {
+          display: block;
+          background: image-url("add.png") no-repeat 10px 8px;
+          padding-left: 35px;
+        }
+
 
         a:hover {
           background-color: $accent-color;

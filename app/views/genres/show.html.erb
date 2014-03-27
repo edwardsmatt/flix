@@ -4,13 +4,14 @@
   </header>
 
   <% if @movies.any? %>
-  <ul>
-    <% @movies.each do |movie| %>
-    <li>
-      <%= link_to movie.title ,movie %>
-    </li>
-    <% end %>
-  </ul>
+    <h3>Movies</h3>
+    <ul>
+      <% @movies.each do |movie| %>
+      <li>
+        <%= link_to movie.title ,movie %>
+      </li>
+      <% end %>
+    </ul>
   <% else %>
     <p>There are no movies in this Genre!</p>
   <% end %>
