@@ -6,6 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+genres = ["Comedy", "Drama", "Romance", 'Thriller', 'Fantasy', 'Documentary', 'Adventure', 'Animation', 'Sci-Fi']
+genres.each {|genre_name| Genre.create!(name: genre_name)}
+
 Movie.create!([
   {
     title: 'Iron Man',
@@ -162,6 +165,8 @@ User.create!([
       admin: false
     }
   ])
+
+
 
 movie = Movie.find_by(title: 'Iron Man')
 movie.reviews.create!(user: User.find_by(username: 'roger'), stars: 3, comment: "I laughed, I cried, I spilled my popcorn!")
