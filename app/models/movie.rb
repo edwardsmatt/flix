@@ -46,6 +46,7 @@ class Movie < ActiveRecord::Base
     slug
   end
 
+  private
   def generate_slug
     self.slug ||= title.parameterize if title
   end
