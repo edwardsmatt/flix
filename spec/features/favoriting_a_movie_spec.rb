@@ -1,5 +1,3 @@
-# add to new file spec/features/favoriting_a_movie_spec.rb
-
 require 'spec_helper'
 
 describe "Favoriting a movie" do

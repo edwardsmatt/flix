@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   before_action :require_signin, except: [:index, :show]
   before_action :require_admin, except: [:index, :show]
-  before_action :set_movie, except: [:index, :new, :create]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   def index
     @movies = Movie.send(movies_scope)
@@ -20,7 +20,6 @@ class MoviesController < ApplicationController
   end
 
   def update
-    @movie = Movie.find(params[:id])
     if @movie.update(movie_params)
       redirect_to @movie, notice: "Movie successfully updated!"
     else
@@ -49,7 +48,7 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:title, :description, :rating, :released_on, :total_gross, :cast, :director, :duration, :image, genre_ids: [])
+    params.require(:movie).permit(:slug, :title, :description, :rating, :released_on, :total_gross, :cast, :director, :duration, :image, genre_ids: [])
   end
 
   def movies_scope
@@ -61,7 +60,7 @@ class MoviesController < ApplicationController
   end
 
   def set_movie
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find_by!(slug: params[:id])
   end
 end
 
