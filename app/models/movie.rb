@@ -1,4 +1,6 @@
 class Movie < ActiveRecord::Base
+  before_validation :generate_slug
+
   has_many :reviews, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :fans, through: :favorites, source: :user
@@ -20,21 +22,17 @@ class Movie < ActiveRecord::Base
     thumb: "50x50>"
   }
 
-  validates :title, presence: true
+  RATINGS = %w(G PG PG-13 R NC-17)
 
+  validates :title, presence: true, uniqueness: true
+  validates :slug, uniqueness: true
   validates :released_on, :duration, presence: true
-
   validates :description, length: { minimum: 25 }
-
   validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
-
+  validates :rating, inclusion: { in: RATINGS }
   validates_attachment :image,
   :content_type => { :content_type => ['image/jpeg', 'image/png'] },
   :size => { :less_than => 1.megabyte }
-
-  RATINGS = %w(G PG PG-13 R NC-17)
-
-  validates :rating, inclusion: { in: RATINGS }
 
   def flop?
     total_gross.blank? || total_gross < 50000000
@@ -42,5 +40,13 @@ class Movie < ActiveRecord::Base
 
   def average_stars
     reviews.average(:stars)
+  end
+
+  def to_param
+    slug
+  end
+
+  def generate_slug
+    self.slug ||= title.parameterize if title
   end
 end
