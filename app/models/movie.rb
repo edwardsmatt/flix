@@ -1,5 +1,6 @@
 class Movie < ActiveRecord::Base
   before_validation :generate_slug
+  before_save :format_slug
 
   has_many :reviews, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -49,5 +50,9 @@ class Movie < ActiveRecord::Base
   private
   def generate_slug
     self.slug ||= title.parameterize if title
+  end
+
+  def format_slug
+    self.slug = slug.parameterize
   end
 end

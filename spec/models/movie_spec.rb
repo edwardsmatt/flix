@@ -7,6 +7,18 @@ describe "A movie" do
     expect(movie.slug).to eq("x-men-the-last-stand")
   end
 
+ it "formats the generatedslug when before it is saved" do
+    movie = Movie.create!(movie_attributes(title: "X-Men: The Last Stand"))
+    expect(movie.slug).to eq("x-men-the-last-stand")
+
+    movie = Movie.find_by!(slug: "x-men-the-last-stand")
+    movie.slug = "X MEN 4"
+    movie.save
+
+    expect(movie.slug).to eq("x-men-4")
+
+  end
+
   it "requires a unique title" do
     movie1 = Movie.create!(movie_attributes)
 
@@ -102,26 +114,6 @@ describe "A movie" do
     expect(movie.valid?).to be_false
     expect(movie.errors[:total_gross].any?).to be_true
   end
-
-  # it "accepts properly formatted image file names" do
-  #   file_names = %w[e.png movie.png movie.jpg movie.gif MOVIE.GIF]
-  #   file_names.each do |file_name|
-  #     movie = Movie.new(image_file_name: file_name)
-
-  #     expect(movie.valid?).to be_false
-  #     expect(movie.errors[:image_file_name].any?).to be_false
-  #   end
-  # end
-
-  # it "rejects improperly formatted image file names" do
-  #   file_names = %w[movie .jpg .png .gif movie.pdf movie.doc]
-  #   file_names.each do |file_name|
-  #     movie = Movie.new(image_file_name: file_name)
-
-  #     expect(movie.valid?).to be_false
-  #     expect(movie.errors[:image_file_name].any?).to be_true
-  #   end
-  # end
 
   it "accepts any rating that is in an approved list" do
     ratings = %w[G PG PG-13 R NC-17]
